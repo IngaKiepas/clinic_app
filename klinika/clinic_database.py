@@ -6,14 +6,14 @@ def createDatabase():
     cursor = connection.cursor()
 
     cursor.execute('''
-                    CREATE TABLE IF NOT EXISTS patients(
-                    patient_id INTEGER PRIMARY KEY,
-                    first_name TEXT NOT NULL,
-                    last_name TEXT NOT NULL,
-                    pesel NUMBER NOT NULL,
-                    street TEXT NOT NULL,
-                    city TEXT NOT NULL,
-                    zip_code NUMBER NOT NULL
+                    CREATE TABLE IF NOT EXISTS patients (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    first_name TEXT,
+                    last_name TEXT,
+                    pesel INTEGER,
+                    street TEXT,
+                    city TEXT,
+                    zip_code INTEGER
                 )''')
     connection.commit()
     connection.close()
@@ -24,8 +24,8 @@ def add_patient(first_name, last_name, pesel, street, city, zip_code):
     cursor = connection.cursor()
 
     try:
-        cursor.execute("INSERT INTO patients(first_name, last_name, pesel, street, city, zip_code) "
-                       "VALUES (?, ?, ?, ?, ?, ?", (first_name, last_name, pesel, street, city, zip_code))
+        cursor.execute("INSERT INTO patients (first_name, last_name, pesel, street, city, zip_code) "
+                       "VALUES (?, ?, ?, ?, ?, ?)", (first_name, last_name, pesel, street, city, zip_code))
 
         connection.commit()
         print("Patient added!")
